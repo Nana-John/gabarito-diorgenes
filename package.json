@@ -1,0 +1,8 @@
+{
+  "dependencies": {
+    "pdf.js": "^0.1.0"
+  },
+  "devDependencies": {
+    "gulp": "^5.0.0"
+  }
+}
