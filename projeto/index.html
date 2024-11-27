@@ -71,7 +71,7 @@ button:hover {
     background-color: #4caf50;
 }
 .question.incorrect {
-    border: 2px solid #ffffff;
+    border: 2px solid #f44336;
     background-color: #f44336;
 }
 .annotations, .category-options {
@@ -83,7 +83,7 @@ button:hover {
     display: inline-block;
     font-size: 14px;
     cursor: pointer;
-    border: 2px solid #aaa;
+    border: 2px solid #c2c2c2;
     border-radius: 5px;
     padding: 5px 10px;
     transition: background-color 0.3s, color 0.3s;
@@ -103,8 +103,6 @@ button:hover {
 }
 .category.C:hover {
     background-color: #2196F3;
-    border-color:#2196F3;
-    color: #111111;
 }
 .category.RSK {
     background-color: transparent;
@@ -112,8 +110,6 @@ button:hover {
 }
 .category.RSK:hover {
     background-color: #FFEB3B;
-    border-color:#FFEB3B;
-    color: #111111;
 }
 .category.D {
     background-color: transparent;
@@ -121,8 +117,6 @@ button:hover {
 }
 .category.D:hover {
     background-color: #FF9800;
-    border-color:#FF9800;
-    color: #111111;
 }
 .category.CHT {
     background-color: transparent;
@@ -130,8 +124,6 @@ button:hover {
 }
 .category.CHT:hover {
     background-color: #F44336;
-    border-color:#F44336;
-    color: #111111;
 }
 
 .answers {
@@ -152,12 +144,12 @@ button:hover {
 }
 .correct-answer {
     background-color: #4caf50;
-    color: #fff;
+    color: #111111;
     border: 2px solid #4caf50;
 }
 .incorrect-answer {
     background-color: #f44336;
-    color: #fff;
+    color: #111111;
     border: 2px solid #f44336;
 }
 </style>
@@ -275,26 +267,33 @@ function annotate(questionNumber, letter, annotation) {
     selectedAnnotation.classList.add('selected');
 }
 
-function setCategory(questionNumber, category) {
+    function setCategory(questionNumber, category) {
     const question = document.querySelector(`.question[data-question="${questionNumber}"]`);
     const categories = question.querySelectorAll('.category');
 
-    categories.forEach(cat => cat.classList.remove('selected'));
+    // Remove a seleção e reseta as cores de fundo
+    categories.forEach(cat => {
+        cat.classList.remove('selected');
+        cat.style.backgroundColor = "transparent"; // Resetando a cor
+    });
+
     const selectedCategory = [...categories].find(cat => cat.textContent === category);
     selectedCategory.classList.add('selected');
 
+    // Alterando a cor de fundo apenas da categoria selecionada
     switch (category) {
         case 'C':
-            question.style.borderColor = '#2196F3';
+            selectedCategory.style.backgroundColor = '#2196F3'; // Cor Azul
+
             break;
         case 'RSK':
-            question.style.borderColor = '#FFEB3B';
+            selectedCategory.style.backgroundColor = '#FFEB3B'; // Cor Amarela
             break;
         case 'D':
-            question.style.borderColor = '#FF9800';
+            selectedCategory.style.backgroundColor = '#FF9800'; // Cor Laranja
             break;
         case 'CHT':
-            question.style.borderColor = '#F44336';
+            selectedCategory.style.backgroundColor = '#F44336'; // Cor Vermelha
             break;
     }
 }
